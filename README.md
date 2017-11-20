@@ -14,7 +14,7 @@ Progressive image loading est une librairie javascript qui vous permet de rédui
 2. Imbrication
 
    ```html
-    <div class="progressiveCont">
-      <img class="progressiveImage" data-src="chemin/vers/image.jpg" alt="" />
-    </div>
+   <div class="progressiveCont">
+    <img class="progressiveImage" data-src="chemin/vers/image.jpg" alt="" />
+   </div>
    ```
