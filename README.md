@@ -2,9 +2,9 @@
 
 Progressive image loading est une librairie javascript qui vous permet de réduire le temps de chargement de votre page en optimisant le chargement des images.
 
-### Comment ca marche
+## Comment ca marche
 
-## Utilisation dans votre code
+### Utilisation dans votre code
 
 1. Vous avez juste à lier le fichier css et le script dans votre html
 
@@ -20,7 +20,7 @@ Progressive image loading est une librairie javascript qui vous permet de rédui
     <img class="progressiveImage" data-src="chemin/vers/image.jpg" alt="" />
   </div>
   ```
-## Utilisation de l'interface web
+### Utilisation de l'interface web
 
 Une fois incris, gratuitement, vous pouvez:
   1. Utiliser le service d'upload d'image
