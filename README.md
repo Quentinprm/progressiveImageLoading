@@ -25,7 +25,7 @@ Progressive image loading est une librairie javascript qui vous permet de rédui
 Une fois inscrit, gratuitement, vous pouvez:
   1. Utiliser le service d'upload d'image
   
-    -Pour ce faire, vous devez notre renseigner l'URI (à faire lors de l'acquisition de votre clé d'API) où
+    -Pour ce faire, vous devez nous renseigner l'URI (à faire lors de l'acquisition de votre clé d'API) où
     faire les requêtes PUT qui vous transmettrons les images traité et formaté.
     
     -De votre côté, vous devrez gérer cette requête pour stocker vos images dans le dossier voulu, qui
