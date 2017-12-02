@@ -27,7 +27,7 @@ Une fois inscrit, gratuitement, vous pouvez:
   
     -Pour ce faire, vous devez notre renseigner l'URI (à faire lors de l'acquisition de votre clé d'API) où faire les requêtes PUT qui vous transmettrons les images traité et formaté.
     
-    -De votre côté, vous devrez gérer cette requête pour stocker vos images dans le dossier voulu.
+    -De votre côté, vous devrez gérer cette requête pour stocker vos images dans le dossier voulu, qui doit être le même. Vous aurez alors une image: image.jpg et une imageLow.jpg
     
   2. Configurer le type d'optimisation souhaité et le format désiré pour votre image
   
