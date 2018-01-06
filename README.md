@@ -6,6 +6,34 @@ Progressive image loading est une librairie javascript qui vous permet de rédui
 
 ### Utilisation dans votre code
 
+#### Upload d'image
+
+1. Vous avez juste à lier le fichier css et le script dans votre html
+
+  ```html
+  <link rel="stylesheet" href="chemin/vers/progressivemImageLoadingUpload.min.css">
+  <script src="chemin/vers/progressivemImageLoadingUpload.min.js"></script>
+  ```
+  
+2. Imbrication
+
+  ```html
+  <div class="progressive-upload">
+  </div>
+  ```
+  
+3. Option
+
+  ```html
+  <script>
+    var progressiveImageOption = new progressiveImage();
+    window.progressiveImageOption = {
+     api-key: 'key'
+    };
+  </script>
+  ```
+#### Progressive image Loading
+
 1. Vous avez juste à lier le fichier css et le script dans votre html
 
   ```html
@@ -16,10 +44,23 @@ Progressive image loading est une librairie javascript qui vous permet de rédui
 2. Imbrication
 
   ```html
-  <div class="progressiveCont">
-    <img class="progressiveImage" data-src="chemin/vers/image.jpg" alt="" />
+  <div class="progressive-container">
+    <img class="progressiveImage" data-src="image.jpg" alt="" />
   </div>
   ```
+  
+  3. Option
+
+  ```html
+  <script>
+    var progressiveImageOption = new progressiveImage();
+    window.progressiveImageOption = {
+     api-key: 'key',
+     effect: 'blur'
+    };
+  </script>
+  ```
+ 
 ### Utilisation de l'interface web
 
 Une fois inscrit, gratuitement, vous pouvez:
