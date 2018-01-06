@@ -1,6 +1,6 @@
 # Progressive Image Loading
 
-Progressive image loading est une librairie javascript qui vous permet de réduire le temps de chargement de votre page en optimisant le chargement des images.
+Progressive image loading est une librairie javascript qui vous permet de réduire le temps de chargement de votre page en optimisant le chargement des images. On s'occupe également de l'upload de vos images tout ça dans le cloud
 
 ## Comment ca marche
 
@@ -71,13 +71,8 @@ Une fois inscrit, gratuitement, vous pouvez:
     
     -De votre côté, vous devrez gérer cette requête pour stocker vos images dans le dossier voulu, qui
     doit être le même. Vous aurez alors une image: image.jpg et une imageLow.jpg
-    
-  2. Configurer le type d'optimisation souhaité et le format désiré pour votre image
   
-    -Votre clé API acquise, vous pourrez configurer le type d'optimisation et le format souhaité pour le
-    chargement de votre image.
-    
-  3. Gérer vos clés d'API
+  2. Gérer vos clés d'API
   
     -Chaque site requiert une  clé API, que vous pourrez acquérir sur notre site web: http://PIL.com
     
