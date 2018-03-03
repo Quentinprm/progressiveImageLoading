@@ -1,15 +1,21 @@
 <template>
   <div class="hello">
-    <h1>toto</h1>
+    <PilImage></PilImage>
   </div>
 </template>
 
 <script>
+
+import PilImage from '@/components/PilImage'
+
 export default {
-  name: 'pil-image',
+  name: 'HelloWorld',
   data () {
     return {
     }
+  },
+  components : {
+  	PilImage
   }
 }
 </script>
