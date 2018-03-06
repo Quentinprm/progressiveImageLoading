@@ -1,6 +1,9 @@
 <template>
   <div>
-  	<img v-bind:src="imgEnCours" @load="onLoad"/>
+  	<img v-bind:class="{ hidden: imgLowHidden }"
+  		v-bind:src="imgLow" @load="onLoadLow"/>
+  	<img v-bind:class="{ hidden: !imgLowHidden }"
+  		v-bind:src="imghighAfficher" @load="onLoadHigh"/>
   </div>
 </template>
 
@@ -10,15 +13,20 @@ export default {
   props : ['imgLow', 'imgHigh'],
   data () {
     return {
-    	imgEnCours: ''
+    	imgEnCours: '',
+    	imghighAfficher : '',
+    	imgLowHidden: false
     }
   },
   mounted(){
 	this.imgEnCours = this.imgLow;
   },
   methods: {
-  	onLoad(){
-  		this.imgEnCours = this.imgHigh;
+  	onLoadLow(){
+  		this.imghighAfficher = this.imgHigh;
+  	},
+  	onLoadHigh(){
+  		this.imgLowHidden = true;
   	}
   }
 }
@@ -27,8 +35,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div{
+	position:relative;
 	width: 20%;
 	max-width: 20%;
+	height:200px;
 	max-height:200px;
 	margin:2.5%;
 	margin-top:10px;
@@ -40,5 +50,13 @@ img{
 	height:100%;
 	max-width: 100%;
     max-height: 100%;
+    position:absolute;
+    left:0;
+    opacity:1;
+    transition:opacity 0.5s linear;
+}
+
+.hidden{
+ opacity:0;   
 }
 </style>
