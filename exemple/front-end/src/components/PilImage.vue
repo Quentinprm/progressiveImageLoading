@@ -13,13 +13,9 @@ export default {
   props : ['imgLow', 'imgHigh'],
   data () {
     return {
-    	imgEnCours: '',
     	imghighAfficher : '',
     	imgLowHidden: false
     }
-  },
-  mounted(){
-	this.imgEnCours = this.imgLow;
   },
   methods: {
   	onLoadLow(){
