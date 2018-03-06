@@ -36,9 +36,7 @@ div{
 	max-width: 20%;
 	height:200px;
 	max-height:200px;
-	margin:2.5%;
-	margin-top:10px;
-	margin-bottom:10px;
+	margin: 10px 2.5% 10px 2.5%;
 }
 
 img{
