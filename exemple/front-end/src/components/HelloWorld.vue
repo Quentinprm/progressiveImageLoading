@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="containerPrincipale">
     <PilImage imgLow = "https://vignette.wikia.nocookie.net/starcitizen/images/e/eb/Four_Horsemen_Final.jpg/revision/latest?cb=20140608004816" imgHigh= "https://i.ytimg.com/vi/9E948dTl_V8/maxresdefault.jpg">	
     </PilImage>
     <PilImage imgLow = "http://tiny.cc/mhzlry" imgHigh= "https://pokemongohub.net/wp-content/uploads/2017/01/pokemon-go-genders.jpg">	
@@ -33,7 +33,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.hello{
+.containerPrincipale{
 	display:flex;
 	flex-wrap: wrap;
 	flex-direction: row;
