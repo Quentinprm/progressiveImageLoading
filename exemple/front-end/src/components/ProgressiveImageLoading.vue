@@ -1,25 +1,23 @@
 <template>
   <div>
-  	<img v-bind:class="{ hidden: imgLowHidden }"
-  		v-bind:src="imgLow" @load="onLoadLow"/>
-  	<img v-bind:class="{ hidden: !imgLowHidden }"
-  		v-bind:src="imghighAfficher" @load="onLoadHigh"/>
+  	<img v-bind:class="{ hidden: imgLowHidden }" v-bind:src="imgLow" @load="onLoadLow"/>
+  	<img v-bind:class="{ hidden: !imgLowHidden }" v-bind:src="imgHighAfficher" @load="onLoadHigh"/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PilImage',
+  name: 'progressiveImageLoading',
   props : ['imgLow', 'imgHigh'],
   data () {
     return {
-    	imghighAfficher : '',
+    	imgHighAfficher : '',
     	imgLowHidden: false
     }
   },
   methods: {
   	onLoadLow(){
-  		this.imghighAfficher = this.imgHigh;
+  		this.imgHighAfficher = this.imgHigh;
   	},
   	onLoadHigh(){
   		this.imgLowHidden = true;
@@ -43,11 +41,11 @@ img{
 	width:100%;
 	height:100%;
 	max-width: 100%;
-    max-height: 100%;
-    position:absolute;
-    left:0;
-    opacity:1;
-    transition:opacity 0.5s linear;
+  max-height: 100%;
+  position:absolute;
+  left:0;
+  opacity:1;
+  transition:opacity 0.5s linear;
 }
 
 .hidden{
