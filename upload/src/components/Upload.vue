@@ -30,7 +30,6 @@
         <b-progress :value="width" :max="max" show-progress animated></b-progress>
         <br>
         <div v-if="width = 100">Upload complete</div>
-        {{urls}}
       </b-col>
     </b-row>
   </b-container>
