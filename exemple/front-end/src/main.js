@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import pil from 'vue-progressive-image-loading';
+
+Vue.component('pil', pil);
 
 Vue.config.productionTip = false
 
