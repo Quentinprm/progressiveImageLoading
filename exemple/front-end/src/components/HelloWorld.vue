@@ -1,24 +1,33 @@
 <template>
   <div class="containerPrincipale">
-    <PIL imgLow = "https://vignette.wikia.nocookie.net/starcitizen/images/e/eb/Four_Horsemen_Final.jpg/revision/latest?cb=20140608004816" imgHigh= "https://i.ytimg.com/vi/9E948dTl_V8/maxresdefault.jpg">	
-    </PIL>
-    <PIL imgLow = "http://tiny.cc/mhzlry" imgHigh= "https://pokemongohub.net/wp-content/uploads/2017/01/pokemon-go-genders.jpg">	
-    </PIL>
-    <PIL imgLow = "https://www.ecranlarge.com/uploads/image/001/008/star-wars-les-derniers-jedi-porgs-1008248.jpg" imgHigh= "https://i.ytimg.com/vi/vtqfnp4sWhU/maxresdefault.jpg">	
-    </PIL>
-    <PIL imgLow = "http://tiny.cc/kkzlry" imgHigh= "http://goldwallpapers.com/uploads/posts/battlestar-galactica-wallpaper/battlestar_galactica_wallpaper_001.jpg">	
-    </PIL>
-    <PIL imgLow = "http://tiny.cc/0mzlry" imgHigh= "https://gpstatic.com/acache/26/72/3/fr/s9-d629cf9e8cc3efdfdda900c0e5975ce0.jpg">	
-    </PIL>
-    <PIL imgLow = "https://media.begeek.fr/2018/03/Adam-Kicinski-Cyberpunk-2077-660x371.jpg" imgHigh= "http://jolstatic.fr/www/captures/3144/6/119366.jpg">	
-    </PIL>
+    <div class="containerImg">
+      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521469494/ft0bsgatnemccjrcztl6.jpg">	
+      </pil>
+    </div>
+    <div class="containerImg">
+      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470466/d7qosyy79fhr3ubadh81.jpg">	
+      </pil>
+    </div>
+    <div class="containerImg">
+      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470472/ct5c5qh3zkm297luvjbt.jpg">	
+      </pil>
+    </div>
+    <div class="containerImg">
+      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470474/ixqqenkoxezrh8mivzsq.jpg">	
+      </pil>
+    </div>
+    <div class="containerImg">
+      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470477/nehiezzlsriarbyj4wyf.jpg">	
+      </pil>
+    </div>
+    <div class="containerImg">
+      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470500/klh15k123fusq2z7bq55.jpg">	
+      </pil>
+    </div>
   </div>
 </template>
 
 <script>
-
-import PIL from '@/components/ProgressiveImageLoading'
-
 export default {
   name: 'HelloWorld',
   data () {
@@ -26,7 +35,6 @@ export default {
     }
   },
   components : {
-  	PilImage
   }
 }
 </script>
@@ -38,5 +46,12 @@ export default {
 	flex-wrap: wrap;
 	flex-direction: row;
 	width:100%;
+}
+.containerImg{
+  width: 20%;
+  max-width: 20%;
+  height:200px;
+  max-height:200px;
+  margin: 10px 2.5% 10px 2.5%;
 }
 </style>

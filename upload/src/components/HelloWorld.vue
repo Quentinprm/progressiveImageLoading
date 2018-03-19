@@ -85,7 +85,8 @@ import axios from 'axios'
           axios.post('https://api.cloudinary.com/v1_1/morgandbs/upload', formData)
             .then((data2) =>{
               it++
-              self.width = (it / total) * 100
+              self.width = (it / total) * 100;
+              console.log(data2);
             })
             .catch((error) =>{
               console.log(error)
