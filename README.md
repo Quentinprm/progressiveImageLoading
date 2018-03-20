@@ -34,31 +34,23 @@ Progressive image loading est une librairie javascript qui vous permet de rédui
   ```
 #### Progressive image Loading
 
-1. Vous avez juste à lier le fichier css et le script dans votre html
+1. Installation
 
   ```html
-  <link rel="stylesheet" href="chemin/vers/progressivemImageLoading.min.css">
-  <script src="chemin/vers/progressivemImageLoading.min.js"></script>
+  npm i vue-progressive-image-loading
   ```
   
 2. Imbrication
 
   ```html
-  <div class="progressive-container">
-    <img class="progressiveImage" data-src="image.jpg" alt="" />
-  </div>
+  import pil from 'vue-progressive-image-loading';
+  Vue.component('pil', pil);
   ```
   
-  3. Option
+3. Usage
 
   ```html
-  <script>
-    var progressiveImageOption = new progressiveImage();
-    window.progressiveImageOption = {
-     api-key: 'key',
-     effect: 'blur'
-    };
-  </script>
+  <pil src = ""></pil>
   ```
  
 ### Utilisation de l'interface web
