@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "vue": "^2.5.16",
-    "vue-progressive-image-loading": "^0.1.0",
+    "vue-progressive-image-loading": "^0.1.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
