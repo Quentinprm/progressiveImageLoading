@@ -8,13 +8,13 @@
         <b-col >
           <h3>Add pictures</h3>
           <b-form @submit="upload">
-              <b-form-group v-for="count in counts" :key="counts.id">
+              <b-form-group v-for="count in counts" :key="counts.id" class="custom-file b-form-file">
                 <b-form-file v-on:change="addFileToTab(count.id, $event.target.files)" accept="image/*" placeholder="Choose a file..."></b-form-file>
                 <b-button v-on:click="deleteFileInput(count.id)" v-if="counts.length > 1" variant="link">delete</b-button>
               </b-form-group>
-              <b-button-group>
+              <b-button-group id="boutons">
                 <b-button v-on:click="addFileInput()" variant="primary">Add More pictures</b-button>
-                <b-button id="right" type="submit" variant="success">Submit</b-button>
+                <b-button type="submit" variant="success">Submit</b-button>
               </b-button-group>
           </b-form>
           <br>
@@ -85,8 +85,7 @@ import axios from 'axios'
           axios.post('https://api.cloudinary.com/v1_1/morgandbs/upload', formData)
             .then((data2) =>{
               it++
-              self.width = (it / total) * 100;
-              console.log(data2);
+              self.width = (it / total) * 100
             })
             .catch((error) =>{
               console.log(error)
@@ -99,11 +98,26 @@ import axios from 'axios'
  }
 </script>
 
-<style>
+<style scoped>
   *{
     border-radius: 0!important;
   }
-  #right{
-    margin-left: 20px;
+  h3{
+    width: 100%;
+    text-align: center;
   }
+
+  .btn-group{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #boutons.btn-group button{
+    margin: auto;
+    width: 20%;
+  }
+  #boutons.btn-group > .btn:first-child{
+    margin-left: auto;
+  }
+
 </style>
