@@ -1,6 +1,6 @@
 {
   "name": "vue-progressive-image-loading",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "un composant vue.js qui permet de faire du Progressive Image Loading",
   "main": "dist/vue-progressive-image-loading.js",
   "scripts": {
