@@ -1,0 +1,26 @@
+//imports
+var express=require('express');
+var usersCtrl=require('./routes/usersCtrl');
+var imagesCtrl=require('./routes/imagesCtrl');
+//Router
+exports.router=(function(){
+    var apiRouter=express.Router();
+
+    //Users routes
+    apiRouter.route('/users/register/').post(usersCtrl.register);
+    apiRouter.route('/users/login/').post(usersCtrl.login);
+    apiRouter.route('/users/logout/').post(usersCtrl.logout);
+    apiRouter.route('/users/email/').put(usersCtrl.changemail);
+    apiRouter.route('/users/password/').put(usersCtrl.changepassword);
+    apiRouter.route('/profile/').get(usersCtrl.profile);
+    apiRouter.route('/users/delete/').delete(usersCtrl.delete);
+    //Images routes 
+    /*
+    apiRouter.route('/images/').post(imagesCtrl.addImage);
+    apiRouter.route('/images/').get(imagesCtrl.getImages);
+    apiRouter.route('images/{id}').get(imagesCtrl.getImage);
+    apiRouter.route('/image/{id}/hq').get(imagesCtrl.getHq);
+    apiRouter.route('image{id}/lq').get(imagesCtrl.getLq);
+    */
+    return apiRouter;
+})();
