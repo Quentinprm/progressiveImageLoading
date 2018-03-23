@@ -10,16 +10,16 @@ const PASSWORD_REGEX  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\
 module.exports= {
     delete: function(req,res){
     var headerAuth=req.headers['authorization'];
-    var userId=jwtUtils.getUserId(headerAuth);
-    console.log("userId:"+userId);
-    if (userId==-1){
+    var username=jwtUtils.getUserId(headerAuth);
+    console.log("username:"+username);
+    if (username==-1){
         return res.status(400).json({'error':'wrong token'});
     }
-    client.hgetall(userId,function(error,result){
+    client.hgetall(username,function(error,result){
         if(result){
             console.log(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth));
             if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
-                client.del(userId,function(err,resultat){
+                client.del(username,function(err,resultat){
                     if(resultat){
                         return res.status(200).json({'msg':'account delete'});
                     }
@@ -39,6 +39,7 @@ module.exports= {
         var email= req.body.email;
         var username=req.body.username;
         var password=req.body.password;
+        var sessiontoken="null";
         console.log("try to register with email:"+email+" username:"+username+" and password:"+password);
         if(email == null || username==null || password==null){
             return res.status(400).json({'error':'missing parameters'});
@@ -55,21 +56,20 @@ module.exports= {
 
         client.hgetall(username, function (error, result) {
             if (result) {
-                return res.status(409).json({'error':'user with that email already exist'}); 
+                return res.status(409).json({'error':'user with that username already exist'}); 
             } else {
                 bcrypt.hash(password,5,function(err,bcryptedPassword){
                         var token =jwtUtils.generateToken(username);
                         client.hmset(username,[
                             'email', email,
-                            'username', username,
                             'password', bcryptedPassword,
                             'token', token,
-                            'sessiontoken',null
+                            'sessiontoken',sessiontoken
                             ], function(err, reply){
                             if(err){
                                 return res.status(500).json({ 'error': 'cannot add user' });
                             }
-                                return res.status(201).json({'userId':username,'token':token});       
+                                return res.status(201).json({'username':username,'token':token});       
                             });            
                 });
                    
@@ -86,7 +86,7 @@ module.exports= {
             if (result) {
                 bcrypt.compare(password,result.password,function(errBcrypt,resBcrypt){
                     if(resBcrypt){
-                        var sessiontoken=jwtUtils.generateTokenForUser(result.username);
+                        var sessiontoken=jwtUtils.generateTokenForUser(username);
                         client.hset(username,'sessiontoken',sessiontoken);
                         return res.status(200).json({'username':result.username,'sessiontoken':sessiontoken});
                     }else{
@@ -94,24 +94,24 @@ module.exports= {
                     }
                 });
             }else{
-                return res.status(404).json({'error': 'user not exist in DB'});
+                return res.status(404).json({'error': 'user not exist in DB or not connected '});
             }
           }); 
     },
 
     logout: function(req,res){
         var headerAuth=req.headers['authorization'];
-        var userId=jwtUtils.getUserId(headerAuth);
-        console.log("userId"+userId);
-        if(userId==-1){
+        var username=jwtUtils.getUserId(headerAuth);
+        console.log("username"+username);
+        if(username==-1){
             return res.status(400).json({'error':'wrong token'});
         }
-        client.hgetall(userId,function(error,result){
+        client.hgetall(username,function(error,result){
             if(result){
                 console.log(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth));
                 if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
                     console.log("sessiontoken"+result.sessiontoken);
-                    client.hset(userId,'sessiontoken',null,function(err,result){
+                    client.hset(username,'sessiontoken',"null",function(err,result){
                         if(result){
                             
                         }else{
@@ -131,18 +131,19 @@ module.exports= {
 
     profile: function(req,res){
         var headerAuth=req.headers['authorization'];
-        var userId=jwtUtils.getUserId(headerAuth);
-        console.log("userId:"+userId);
-        if (userId==-1){
-            
+        var username=jwtUtils.getUserId(headerAuth);
+        console.log("username:"+username);
+        if (username==-1){
             return res.status(400).json({'error':'wrong token'});
         }
-        client.hgetall(userId,function(error,result){
+        client.hgetall(username,function(error,result){
             if(result){
-                console.log(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth));
+                if(result.sessiontoken=="null"){
+                    return res.status(402).json({"error":"need to be log in"});
+                }
                 if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
                     console.log("sessiontoken"+result.sessiontoken);
-                    return res.status(200).json({'username':result.username,'password':result.password,'email':result.email,'id':userId,'token':result.token})
+                    return res.status(200).json({'username':result.username,'password':result.password,'email':result.email,'token':result.token})
                 }else{
                     return res.status(400).json({'error':'this token is a previous version'});
                 }      
@@ -155,24 +156,24 @@ module.exports= {
     changemail: function(req,res){
         console.log("changemail function");
         var headerAuth=req.headers['authorization'];
-        var userId=jwtUtils.getUserId(headerAuth);
+        var username=jwtUtils.getUserId(headerAuth);
         var email=req.body.email;
         if (!EMAIL_REGEX.test(email)) {
             console.log("pas le bon mail:"+email);
             return res.status(400).json({ 'error': 'email is not valid' });
          }
-        if (userId==-1){
+        if (username==-1){
             return res.status(400).json({'error':'wrong token'});
         }
-        client.hgetall(userId,function(error,result){
+        client.hgetall(username,function(error,result){
             if(result){
                 if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
-                    client.hset(userId,'email',email,function(err,resultat){
+                    client.hset(username,'email',email,function(err,resultat){
                         if(resultat){
                             console.log("test");
                             
                         }else{
-                            return res.status(200).json({'username':userId});
+                            return res.status(200).json({'username':username});
                         }
                     });
                 }else{
@@ -187,26 +188,61 @@ module.exports= {
     changepassword: function(req,res){
         console.log("changepassword function");
         var headerAuth=req.headers['authorization'];
-        var userId=jwtUtils.getUserId(headerAuth);
+        var username=jwtUtils.getUserId(headerAuth);
         var password=req.body.password;
         if (!PASSWORD_REGEX.test(password)){
             return res.status(400).json({ 'error': 'password invalid (must length > 8 and 1 maj, 1min , 1 number,1 special char )' });
         }
-        if (userId==-1){
+        if (username==-1){
             return res.status(400).json({'error':'wrong token'});
         }
-        client.hgetall(userId,function(error,result){
+        client.hgetall(username,function(error,result){
             if(result){
                 if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
                     bcrypt.hash(password,5,function(err,bcryptedPassword){
-                        client.hset(userId,'password',bcryptedPassword,function(err,resultat){
+                        client.hset(username,'password',bcryptedPassword,function(err,resultat){
                             if(resultat){
                             }else{
-                                return res.status(200).json({'username':userId});
+                                return res.status(200).json({'username':username});
                             }
                         });
                     });
                     
+                }else{
+                    return res.status(400).json({'error':'this token is a previous version'});
+                }      
+            }else{
+                return res.status(404).json({"error":"user not exist in DB"});
+            }
+        });
+    },
+    changeusername: function(req,res){
+        console.log("changeusername function");
+        var headerAuth=req.headers['authorization'];
+        var username=jwtUtils.getUserId(headerAuth);
+        var usernamenew=req.body.username;
+        console.log("le nouvel username :"+usernamenew);
+
+        if (usernamenew.length >= 13 || usernamenew.length <= 4) {
+            return res.status(400).json({ 'error': 'wrong username (must be length 5 - 12)' });
+        }
+        if (username==-1){
+            return res.status(400).json({'error':'wrong token'});
+        }
+        client.hgetall(username,function(error,result){
+            if(result){
+                if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
+                        client.renamenx(username,usernamenew,function(e,r){
+                            if(r){
+                                var sessiontoken=jwtUtils.generateTokenForUser(usernamenew);
+                                client.hset(usernamenew,'sessiontoken',sessiontoken);  
+                                res.status(200).json({"sessiontoken":sessiontoken});
+                            }
+                            if(e){
+                                res.status(403).json({"error":"acccount with this username already exist"});
+                            }
+                        });
+                              
                 }else{
                     return res.status(400).json({'error':'this token is a previous version'});
                 }      
