@@ -12,13 +12,16 @@ exports.router=(function(){
     apiRouter.route('/users/logout/').post(usersCtrl.logout);
     apiRouter.route('/users/email/').put(usersCtrl.changemail);
     apiRouter.route('/users/password/').put(usersCtrl.changepassword);
+    apiRouter.route('/users/username/').put(usersCtrl.changeusername);
     apiRouter.route('/profile/').get(usersCtrl.profile);
     apiRouter.route('/users/delete/').delete(usersCtrl.delete);
     //Images routes 
+    apiRouter.route('/images/').get(imagesCtrl.getImages);
+    apiRouter.route('/images/:id/').get(imagesCtrl.getImage);
     /*
     apiRouter.route('/images/').post(imagesCtrl.addImage);
     apiRouter.route('/images/').get(imagesCtrl.getImages);
-    apiRouter.route('images/{id}').get(imagesCtrl.getImage);
+    apiRouter.route('images/:id}').get(imagesCtrl.getImage);
     apiRouter.route('/image/{id}/hq').get(imagesCtrl.getHq);
     apiRouter.route('image{id}/lq').get(imagesCtrl.getLq);
     */
