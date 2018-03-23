@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "serveur pour api rest",
+  "main": "server.js",
+  "scripts": {
+    "test": "server.http.api.rest"
+  },
+  "keywords": [
+    "server.http.api.rest"
+  ],
+  "author": "Quentin Parmentier",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.0",
+    "axios": "^0.18.0",
+    "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.0",
+    "nodemon": "^1.17.2",
+    "rand-token": "^0.4.0",
+    "redis": "^2.8.0",
+    "response-time": "^2.3.2"
+  }
+}
