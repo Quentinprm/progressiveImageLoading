@@ -40,6 +40,9 @@
   import randomID from 'random-id'
 
   export default {
+      props: [
+        'apiKey'
+      ],
       data: function() {
           return {
               width: 0,
@@ -55,7 +58,8 @@
               }],
               files: [],
               urls: [],
-              uploaded: false
+              uploaded: false,
+              file: null
           }
       },
       mounted() {
@@ -94,28 +98,34 @@
               }
           },
           upload: function() {
-              let file = '../data.json'
-              this.uploaded = true
               let total = this.files.length
               let it = 0
               let self = this
-              for (let i = 0; i < total; i++) {
-                  let formData = new FormData();
-                  formData.append('file', this.files[i].file);
-                  formData.append("api_key", this.cloudinary.apiKey);
-                  formData.append('upload_preset', this.cloudinary.uploadPreset);
-                  axios.post('https://api.cloudinary.com/v1_1/morgandbs/upload', formData)
-                      .then((data2) => {
-                          it++
-                          self.width = (it / total) * 100
-                          this.urls.push(data2.data.url)
-                      })
-                      .catch((error) => {
-                          console.log(error)
-                          it++
-                          self.width = (it / total) * 100
-                      })
-              }
+              axios.post('http://localhost:8080/apiKey', {headers: {'token': this.apiKey}})
+                .then((response) =>{
+                  this.uploaded = true
+                  for (let i = 0; i < total; i++) {
+                      let formData = new FormData();
+                      formData.append('file', this.files[i].file);
+                      formData.append("api_key", response.data.api_key);
+                      formData.append('upload_preset',response.data.upload_preset);
+                      axios.post('https://api.cloudinary.com/v1_1/'+response.data.cloudName+'/upload', formData)
+                          .then((data2) => {
+                              it++
+                              self.width = (it / total) * 100
+                              this.urls.push(data2.data.url)
+                              axios.post('http://localhost:8080/url', {headers: {'token': this.apiKey}, data: data2.data.url})
+                          })
+                          .catch((error) => {
+                              console.log(error)
+                              it++
+                              self.width = (it / total) * 100
+                          })
+                  }
+                })
+                .catch((error) =>{
+                  console.log(error)
+                })
           }
       }
   }
