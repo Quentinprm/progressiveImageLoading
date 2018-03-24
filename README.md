@@ -1,6 +1,6 @@
 # Progressive Image Loading
 
-Progressive image loading is a JS library which allow you to reduce the lodaing time of your webpage by optimizing the loading of all your pictures. We also care about the upload of you pictures in the cloud.
+Progressive image loading is a vueJS solution which allow you to reduce the loading time of your webpage by optimizing the loading of all your pictures. We also care about the upload of you pictures in the cloud.
 
 ## How it works
 
