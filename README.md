@@ -4,9 +4,7 @@ Progressive image loading is a JS library which allow you to reduce the lodaing 
 
 ## How it works
 
-### Import in your code
-
-#### Upload d'image
+#### Upload Component
 
 1. In a terminal
 
