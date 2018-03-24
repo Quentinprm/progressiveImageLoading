@@ -47,11 +47,6 @@
           return {
               width: 0,
               max: 100,
-              cloudinary: {
-                  uploadPreset: 'wimsusxm  ',
-                  apiKey: '396852746268724',
-                  cloudName: 'morgandbs',
-              },
               input_file: [{
                   'id': randomID(64),
                   'file': null
