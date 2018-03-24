@@ -1,37 +1,37 @@
 # Progressive Image Loading
 
-Progressive image loading est une librairie javascript qui vous permet de réduire le temps de chargement de votre page en optimisant le chargement des images. On s'occupe également de l'upload de vos images tout ça dans le cloud
+Progressive image loading is a JS library which allow you to reduce the lodaing time of your webpage by optimizing the loading of all your pictures. We also care about the upload of you pictures in the cloud.
 
-## Comment ca marche
+## How it works
 
-### Utilisation dans votre code
+### Import in your code
 
 #### Upload d'image
 
-1. Vous avez juste à lier le fichier css et le script dans votre html
+1. In a terminal
 
-  ```html
-  <link rel="stylesheet" href="chemin/vers/progressivemImageLoadingUpload.min.css">
-  <script src="chemin/vers/progressivemImageLoadingUpload.min.js"></script>
+  ```
+  npm i progressive-image-loading-upload --save
   ```
   
-2. Imbrication
+2. In your vue Component
 
   ```html
-  <div class="progressive-upload">
-  </div>
+<template>
+  <upload apiKey="YOUR_API_KEY"></upload>
+</template>
+
+<script>
+  import Upload from 'progressive-image-loading-upload'
+
+  export default {
+      components:{
+        'upload':Upload,
+      }
+  }
+</script>
   ```
   
-3. Option
-
-  ```html
-  <script>
-    var progressiveImageOption = new progressiveImage();
-    window.progressiveImageOption = {
-     api-key: 'key'
-    };
-  </script>
-  ```
 #### Progressive image Loading
 
 1. Installation
