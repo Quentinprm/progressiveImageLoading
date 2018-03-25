@@ -60,6 +60,7 @@ module.exports= {
             } else {
                 bcrypt.hash(password,5,function(err,bcryptedPassword){
                         var token =jwtUtils.generateToken(username);
+
                         client.hmset(username,[
                             'email', email,
                             'password', bcryptedPassword,
@@ -69,6 +70,11 @@ module.exports= {
                             if(err){
                                 return res.status(500).json({ 'error': 'cannot add user' });
                             }
+                               if(client.exists("apikey")){
+                                   client.lpush("apikey",token);
+                               }else{
+                                   client.lset("apikey",token);
+                               }
                                 return res.status(201).json({'username':username,'token':token});       
                             });            
                 });

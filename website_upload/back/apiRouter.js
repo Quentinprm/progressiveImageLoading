@@ -18,6 +18,7 @@ exports.router=(function(){
     //Images routes 
     apiRouter.route('/images/').get(imagesCtrl.getImages);
     apiRouter.route('/images/:id/').get(imagesCtrl.getImage);
+    apiRouter.route('/images/add').post(imagesCtrl.addImage);
     /*
     apiRouter.route('/images/').post(imagesCtrl.addImage);
     apiRouter.route('/images/').get(imagesCtrl.getImages);
