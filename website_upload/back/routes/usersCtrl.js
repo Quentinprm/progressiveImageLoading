@@ -9,6 +9,7 @@ const PASSWORD_REGEX  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\
 //Routes
 module.exports= {
     delete: function(req,res){
+        console.log("delete an account");
     var headerAuth=req.headers['authorization'];
     var username=jwtUtils.getUserId(headerAuth);
     console.log("username:"+username);
@@ -17,8 +18,19 @@ module.exports= {
     }
     client.hgetall(username,function(error,result){
         if(result){
-            console.log(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth));
             if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
+                console.log("apikey:"+result.token);
+                client.get(result.token,function(b,a){
+                    if(a){
+                        console.log("longueur"+a.length);
+                        for(var i=0;i<a.length;i++){
+                            console.log("on efface l'élément"+i);
+                            client.del(a[i]);
+                        }
+                    }
+                });
+                client.del(result.token);
+                client.lrem("apikey",1,result.token);
                 client.del(username,function(err,resultat){
                     if(resultat){
                         return res.status(200).json({'msg':'account delete'});
