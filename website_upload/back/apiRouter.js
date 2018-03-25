@@ -19,6 +19,7 @@ exports.router=(function(){
     apiRouter.route('/images/').get(imagesCtrl.getImages);
     apiRouter.route('/images/:id/').get(imagesCtrl.getImage);
     apiRouter.route('/images/add').post(imagesCtrl.addImage);
+    apiRouter.route('/images/:id/del').delete(imagesCtrl.delImage);
     /*
     apiRouter.route('/images/').post(imagesCtrl.addImage);
     apiRouter.route('/images/').get(imagesCtrl.getImages);

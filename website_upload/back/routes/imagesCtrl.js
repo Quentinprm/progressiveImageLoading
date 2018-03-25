@@ -14,24 +14,35 @@ module.exports={
         if(name==null||linkhq==null||linklq==null){
             return res.status(400).json({'error':'missing parameters'});
         }
-        var token=jwtUtils.parseAuthorization(headerAuth);
-        client.lrem("apikey",1,token,function(err,result){
-            if(result){
-                client.lpush("apikey",token);
-                client.hset(name,"linkhq",linkhq,"linklq",linklq,"token",token);
-                if(client.exists(token)){
-                    client.lpush(token,name,function(err,resultat){
-                        if(resultat){
-                            return res.status(200).json({'idimg':name});
-                        }else{
-                            return res.status(500);
+        if(!client.exists("imageid")){
+            client.set("imageid",0);
+        }
+        client.incr("imageid",function(err,r){
+            if(r){
+                var id=r;
+                var token=jwtUtils.parseAuthorization(headerAuth);
+                client.lrem("apikey",1,token,function(err,result){
+                    if(result){
+                        client.lpush("apikey",token);
+                        if(client.exists(token)){
+                            client.hset(id,"name",name,"linkhq",linkhq,"linklq",linklq,"token",token);
+                            client.lpush(token,id,function(err,resultat){
+                                if(resultat){
+                                    return res.status(200).json({'idimg':id});
+                                }else{
+                                    return res.status(500);
+                                }
+                            });
                         }
-                    });
-                }
+                    }else{
+                       return res.status(404).json({'error':'apikey not found'});
+                    }
+                });
             }else{
-               return res.status(404).json({'error':'apikey not found'});
+                return res.status(500).json({'error':'cannot increment id'});
             }
         });
+       
     },
     getImages:function(req,res){
         var headerAuth=req.headers['authorization'];
@@ -56,13 +67,12 @@ module.exports={
             }
         }); 
     },
-
     getImage:function(req,res){
-
         var headerAuth=req.headers['authorization'];
         var token=jwtUtils.parseAuthorization(headerAuth);
         client.lrem("apikey",1,token,function(err,result){
             if(result){
+                client.lpush("apikey",token);
                 var id=req.params.id;
                 if(id==null){
                     return res.status(400).json({'error':'missing parameters'});
@@ -78,6 +88,31 @@ module.exports={
                 }else{
                     return res.status(404).json({"error":"image not found"});
                 }   
+                })
+            }else{
+               return res.status(404).json({'error':'apikey not found'});
+            }
+        }); 
+    },
+    delImage:function(req,res){
+        var headerAuth=req.headers['authorization'];
+        var token=jwtUtils.parseAuthorization(headerAuth);
+        client.lrem("apikey",1,token,function(err,result){
+            if(result){
+                client.lpush("apikey",token);
+                var id=req.params.id;
+                if(id==null){
+                    return res.status(400).json({'error':'missing parameters'});
+                }
+                client.del(id,function(err,resultat){
+                        client.lrem(token,1,id,function(e,r){
+                            if(r){
+                                console.log("on passe bien la");
+                                return res.status(200).json({"response":"ok"});
+                            }else{
+                                return res.status(404).json({'error':'apikey id img list not found'});
+                            }
+                        });
                 })
             }else{
                return res.status(404).json({'error':'apikey not found'});
