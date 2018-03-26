@@ -7,8 +7,9 @@ var apiRouter=require('./apiRouter').router;
 //Instantiable server
 var server = express();
 var cors = require("cors");
-server.use(cors({origin: "http://localhost:8080"}));
 var client = redis.createClient();
+// use it before all route definitions
+server.use(cors({origin: 'http://localhost:8080'}));
 // Body Parser configuration
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());

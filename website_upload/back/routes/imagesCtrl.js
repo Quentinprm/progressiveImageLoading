@@ -3,6 +3,12 @@ var jwtUtils= require('../utils/jwt.utils')
 var redis = require('redis');
 var axios = require('axios');
 var client = redis.createClient();
+const cloudinary = require('cloudinary')
+cloudinary.config({
+  cloud_name: 'morgandbs',
+  api_key: '396852746268724',
+  api_secret: 'wQ8JPv0UxJv2_YaEKDQfHgRRArA'
+});
 //Routes
 module.exports={
     addImage:function(req,res){
@@ -104,9 +110,11 @@ module.exports={
                 if(id==null){
                     return res.status(400).json({'error':'missing parameters'});
                 }
+                cloudinary.v2.uploader.destroy(client.hget(id,"name"));
                 client.del(id,function(err,resultat){
                         client.lrem(token,1,id,function(e,r){
                             if(r){
+                                cloudinary.v2.uploader.destroy();
                                 console.log("on passe bien la");
                                 return res.status(200).json({"response":"ok"});
                             }else{
