@@ -20,12 +20,11 @@ exports.router=(function(){
     apiRouter.route('/images/:id/').get(imagesCtrl.getImage);
     apiRouter.route('/images/add').post(imagesCtrl.addImage);
     apiRouter.route('/images/:id/del').delete(imagesCtrl.delImage);
+    //apikey verification
+    apiRouter.route('/apikey').get(usersCtrl.verifyapikey);
     /*
     apiRouter.route('/images/').post(imagesCtrl.addImage);
     apiRouter.route('/images/').get(imagesCtrl.getImages);
-    apiRouter.route('images/:id}').get(imagesCtrl.getImage);
-    apiRouter.route('/image/{id}/hq').get(imagesCtrl.getHq);
-    apiRouter.route('image{id}/lq').get(imagesCtrl.getLq);
     */
     return apiRouter;
 })();

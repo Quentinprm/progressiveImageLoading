@@ -8,6 +8,20 @@ const EMAIL_REGEX     = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(
 const PASSWORD_REGEX  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
 //Routes
 module.exports= {
+    verifyapikey:function(req,res){
+        console.log("verifyapikey function");
+        var headerAuth=req.headers['authorization'];
+        var token=jwtUtils.parseAuthorization(headerAuth);
+        client.lrem("apikey",1,token,function(err,result){
+            if(result){
+                client.lpush("apikey",token);
+                let info = {'api_key': token, 'upload_preset': 'wimsusxm', 'cloudName': 'morgandbs'}
+                return res.status(200).json(info);
+            }else{
+               return res.status(404).json({'error':'apikey not found'});
+            }
+        });
+    },
   delete: function(req,res){
     console.log("delete an account");
     var headerAuth=req.headers['sessiontoken'];
