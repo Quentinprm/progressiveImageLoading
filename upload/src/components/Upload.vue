@@ -52,13 +52,9 @@
                   'file': null
               }],
               files: [],
-              urls: [],
               uploaded: false,
               file: null
           }
-      },
-      mounted() {
-          this.$emit('urls_files', this.urls)
       },
       methods: {
           addFileToTab: function(id, file) {
@@ -108,8 +104,12 @@
                           .then((data2) => {
                               it++
                               self.width = (it / total) * 100
-                              this.urls.push(data2.data.url)
-                              axios.post('http://localhost:8080/url', {headers: {'token': this.apiKey}, data: data2.data.url})
+                              let name = data2.data.public_id
+                              let url = data2.data.url
+                              let url_low = url.split('upload/')[0]+'upload/q_01/'+url.split('upload/')[1]
+
+                              let pic = {'name': name, 'linkhq': url, 'linklq': url_low}
+                              axios.post('http://localhost:8080/url', {headers: {'token': this.apiKey}, data: pic})
                           })
                           .catch((error) => {
                               console.log(error)

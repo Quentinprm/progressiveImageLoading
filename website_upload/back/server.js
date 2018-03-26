@@ -6,8 +6,8 @@ var axios = require('axios');
 var apiRouter=require('./apiRouter').router;
 //Instantiable server
 var server = express();
+var cors = require("cors");
 var client = redis.createClient();
-var cors = require('cors');
 // use it before all route definitions
 server.use(cors({origin: 'http://localhost:8080'}));
 // Body Parser configuration

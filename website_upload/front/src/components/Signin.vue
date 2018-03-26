@@ -9,8 +9,8 @@
 			<h1>Sign in</h1>
 			<form @submit.prevent="signin()">
 				<div>
-					<label for="email">Email :</label>
-					<input v-model="user.email" id="email" type="text" />
+					<label for="username">Nom d'utilisateur :</label>
+					<input v-model="user.username" id="username" type="text" />
 				</div>
 				<div>
 					<label for="password">Password :</label>
@@ -23,8 +23,8 @@
 			<h1>Sign up</h1>
 			<form @submit.prevent="signup()">
 				<div>
-					<label for="fullname">fullname :</label>
-					<input v-model="user_signup.fullname" id="fullname" type="text" />
+					<label for="username">Nom d'utilisateur :</label>
+					<input v-model="user_signup.username" id="username" type="text" />
 				</div>
 				<div>
 					<label for="email">Email :</label>
@@ -47,8 +47,8 @@ import api from '../api'
 export default {
 	data () {
 		return {
-			user:{email: "", password: ""},
-			user_signup:{email:"",possword:"",fullname:""}
+			user:{username: "", password: ""},
+			user_signup:{email:"",password:"",username:""}
 		}
 	},
 	methods: {
