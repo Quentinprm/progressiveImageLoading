@@ -53,10 +53,10 @@ export default {
 		},
 		logout ({commit}, forceDeco) {
 			commit("initState")
-			app.defaults.headers.common['sessiontoken'] = "token="+ls.get("token");
+			api.defaults.headers.common['sessiontoken'] = "token="+ls.get("token");
 			ls.remove('token')
 			if(forceDeco){
-				api.delete('users/logout/').then(response => {
+				api.post('users/logout/').then(response => {
 					commit("initState")
 				}).catch(error => {
 					reject("store > auth > logout -> error")

@@ -9,9 +9,9 @@
 			<p id="add">
 				<router-link :to="{ path: '/' }">Uploader une image</router-link>
 			</p>
-			<p v-for="chan in channels" class="chan">
+			<!--<p v-for="chan in channels" class="chan">
 				<router-link :to="{ path: '/' + chan._id }">{{chan.label}}</router-link>
-			</p>
+			</p>-->
 		</div>
 		<div id="right">
 			<router-view :key="$route.fullPath"></router-view>
@@ -35,7 +35,7 @@ export default {
 			this.$router.push({path:'/'});
 		}
 	},
-	created () {
+	created () {/*
 
 		api.get('/channels').then((response) => {
 			this.channels = response.data
@@ -43,7 +43,7 @@ export default {
 
 		api.get('/members', ls.get('token')).then((response) => {
 			this.members = response.data
-		});
+		});*/
 	},
 	computed: {
 		hasChannel () {
