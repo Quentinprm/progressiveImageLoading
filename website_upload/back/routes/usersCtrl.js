@@ -10,7 +10,7 @@ const PASSWORD_REGEX  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\
 module.exports= {
     delete: function(req,res){
         console.log("delete an account");
-    var headerAuth=req.headers['authorization'];
+    var headerAuth=req.headers['sessiontoken'];
     var username=jwtUtils.getUserId(headerAuth);
     console.log("username:"+username);
     if (username==-1){
@@ -87,7 +87,7 @@ module.exports= {
                                }else{
                                    client.lset("apikey",token);
                                }
-                                return res.status(201).json({'username':username,'token':token});       
+                                return res.status(201).json({'username':username,'apikey':token});       
                             });            
                 });
                    
@@ -106,7 +106,7 @@ module.exports= {
                     if(resBcrypt){
                         var sessiontoken=jwtUtils.generateTokenForUser(username);
                         client.hset(username,'sessiontoken',sessiontoken);
-                        return res.status(200).json({'username':result.username,'sessiontoken':sessiontoken});
+                        return res.status(200).json({'username':result.username,'sessiontoken':sessiontoken,'apikey':result.token});
                     }else{
                         return res.status(403).json({'error':'invalid password'});
                     }
@@ -118,7 +118,7 @@ module.exports= {
     },
 
     logout: function(req,res){
-        var headerAuth=req.headers['authorization'];
+        var headerAuth=req.headers['sessiontoken'];
         var username=jwtUtils.getUserId(headerAuth);
         console.log("username"+username);
         if(username==-1){
@@ -148,7 +148,7 @@ module.exports= {
     },
 
     profile: function(req,res){
-        var headerAuth=req.headers['authorization'];
+        var headerAuth=req.headers['sessiontoken'];
         var username=jwtUtils.getUserId(headerAuth);
         console.log("username:"+username);
         if (username==-1){
@@ -161,7 +161,7 @@ module.exports= {
                 }
                 if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
                     console.log("sessiontoken"+result.sessiontoken);
-                    return res.status(200).json({'username':result.username,'password':result.password,'email':result.email,'token':result.token})
+                    return res.status(200).json({'username':result.username,'password':result.password,'email':result.email,'apikey':result.token})
                 }else{
                     return res.status(400).json({'error':'this token is a previous version'});
                 }      
@@ -173,7 +173,7 @@ module.exports= {
 
     changemail: function(req,res){
         console.log("changemail function");
-        var headerAuth=req.headers['authorization'];
+        var headerAuth=req.headers['sessiontoken'];
         var username=jwtUtils.getUserId(headerAuth);
         var email=req.body.email;
         if (!EMAIL_REGEX.test(email)) {
@@ -205,7 +205,7 @@ module.exports= {
 
     changepassword: function(req,res){
         console.log("changepassword function");
-        var headerAuth=req.headers['authorization'];
+        var headerAuth=req.headers['sessiontoken'];
         var username=jwtUtils.getUserId(headerAuth);
         var password=req.body.password;
         if (!PASSWORD_REGEX.test(password)){
@@ -236,7 +236,7 @@ module.exports= {
     },
     changeusername: function(req,res){
         console.log("changeusername function");
-        var headerAuth=req.headers['authorization'];
+        var headerAuth=req.headers['sessiontoken'];
         var username=jwtUtils.getUserId(headerAuth);
         var usernamenew=req.body.username;
         console.log("le nouvel username :"+usernamenew);
