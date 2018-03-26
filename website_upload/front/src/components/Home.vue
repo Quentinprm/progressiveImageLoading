@@ -5,6 +5,8 @@
 				<img src="../assets/logo.png"/>
 			</div>
 			<button  v-on:click="logout()">Déconnexion</button>
+			<h2>Clé d'api</h2>
+			<p>{{ apikey }}</p>
 			<h2>Images</h2>
 			<p id="add">
 				<router-link :to="{ path: '/' }">Uploader une image</router-link>
@@ -26,7 +28,8 @@ export default {
 	data () {
 		return {
 			channels: [],
-			members: []
+			members: [],
+			apikey: ls.get("apikey")
 		}
 	},
 	methods:{
@@ -35,7 +38,8 @@ export default {
 			this.$router.push({path:'/'});
 		}
 	},
-	created () {/*
+	created () {
+		/*
 
 		api.get('/channels').then((response) => {
 			this.channels = response.data
@@ -55,6 +59,9 @@ export default {
 
 
 <style lang="css" scoped>
+p{
+	word-wrap: break-word;
+}
 #container {
 	height: 100%;
 	width: 100%;

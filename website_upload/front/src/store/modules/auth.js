@@ -32,10 +32,11 @@ export default {
 	actions: {
 		login ({commit}, credentials) {
 			return api.post('users/login/', credentials).then(response => {
-				ls.set('token', response.data.sessiontoken)
-				commit("setConnectedUser", response.data)
+				ls.set('token', response.data.sessiontoken);
+				ls.set('apikey', response.data.apikey);
+				commit("setConnectedUser", response.data);
 			}).catch(error => {
-				console.log(error)
+				console.log(error);
 			})
 		},
 		signup ({commit},credentials){
