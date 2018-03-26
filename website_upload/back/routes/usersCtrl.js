@@ -10,41 +10,41 @@ const PASSWORD_REGEX  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\
 module.exports= {
     delete: function(req,res){
         console.log("delete an account");
-    var headerAuth=req.headers['authorization'];
-    var username=jwtUtils.getUserId(headerAuth);
-    console.log("username:"+username);
-    if (username==-1){
-        return res.status(400).json({'error':'wrong token'});
-    }
-    client.hgetall(username,function(error,result){
-        if(result){
-            if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
-                console.log("apikey:"+result.token);
-                client.get(result.token,function(b,a){
-                    if(a){
-                        console.log("longueur"+a.length);
-                        for(var i=0;i<a.length;i++){
-                            console.log("on efface l'élément"+i);
-                            client.del(a[i]);
-                        }
-                    }
-                });
-                client.del(result.token);
-                client.lrem("apikey",1,result.token);
-                client.del(username,function(err,resultat){
-                    if(resultat){
-                        return res.status(200).json({'msg':'account delete'});
-                    }
-                });
-                
-            }else{
-                return res.status(400).json({'error':'this token is a previous version'});
-            }      
-        }else{
-            return res.status(404).json({"error":"user not exist in DB"});
+        var headerAuth=req.headers['authorization'];
+        var username=jwtUtils.getUserId(headerAuth);
+        console.log("username:"+username);
+        if (username==-1){
+            return res.status(400).json({'error':'wrong token'});
         }
-    });
-},
+        client.hgetall(username,function(error,result){
+            if(result){
+                if(result.sessiontoken==jwtUtils.parseAuthorization(headerAuth)){
+                    console.log("apikey:"+result.token);
+                    client.get(result.token,function(b,a){
+                        if(a){
+                            console.log("longueur"+a.length);
+                            for(var i=0;i<a.length;i++){
+                                console.log("on efface l'élément"+i);
+                                client.del(a[i]);
+                            }
+                        }
+                    });
+                    client.del(result.token);
+                    client.lrem("apikey",1,result.token);
+                    client.del(username,function(err,resultat){
+                        if(resultat){
+                            return res.status(200).json({'msg':'account delete'});
+                        }
+                    });
+
+                }else{
+                    return res.status(400).json({'error':'this token is a previous version'});
+                }
+            }else{
+                return res.status(404).json({"error":"user not exist in DB"});
+            }
+        });
+    },
     register: function(req,res){
         console.log("register route");
         //Params
@@ -68,7 +68,7 @@ module.exports= {
 
         client.hgetall(username, function (error, result) {
             if (result) {
-                return res.status(409).json({'error':'user with that username already exist'}); 
+                return res.status(409).json({'error':'user with that username already exist'});
             } else {
                 bcrypt.hash(password,5,function(err,bcryptedPassword){
                         var token =jwtUtils.generateToken(username);
@@ -87,12 +87,12 @@ module.exports= {
                                }else{
                                    client.lset("apikey",token);
                                }
-                                return res.status(201).json({'username':username,'token':token});       
-                            });            
+                                return res.status(201).json({'username':username,'token':token});
+                            });
                 });
-                   
+
             }
-        });   
+        });
     },
     login: function(req,res){
         var username=req.body.username;
@@ -114,7 +114,7 @@ module.exports= {
             }else{
                 return res.status(404).json({'error': 'user not exist in DB or not connected '});
             }
-          }); 
+          });
     },
 
     logout: function(req,res){
@@ -131,16 +131,16 @@ module.exports= {
                     console.log("sessiontoken"+result.sessiontoken);
                     client.hset(username,'sessiontoken',"null",function(err,result){
                         if(result){
-                            
+
                         }else{
                             console.log(result.sessiontoken);
                             return res.status(200).json({'ok':'token is kill','token':result.sessiontoken});
                         }
                     });
-                    
+
                 }else{
                     return res.status(400).json({'error':'this token is a previous version'});
-                }      
+                }
             }else{
                 return res.status(404).json({"error":"user not exist in DB"});
             }
@@ -164,7 +164,7 @@ module.exports= {
                     return res.status(200).json({'username':result.username,'password':result.password,'email':result.email,'token':result.token})
                 }else{
                     return res.status(400).json({'error':'this token is a previous version'});
-                }      
+                }
             }else{
                 return res.status(404).json({"error":"user not exist in DB"});
             }
@@ -189,14 +189,14 @@ module.exports= {
                     client.hset(username,'email',email,function(err,resultat){
                         if(resultat){
                             console.log("test");
-                            
+
                         }else{
                             return res.status(200).json({'username':username});
                         }
                     });
                 }else{
                     return res.status(400).json({'error':'this token is a previous version'});
-                }      
+                }
             }else{
                 return res.status(404).json({"error":"user not exist in DB"});
             }
@@ -225,10 +225,10 @@ module.exports= {
                             }
                         });
                     });
-                    
+
                 }else{
                     return res.status(400).json({'error':'this token is a previous version'});
-                }      
+                }
             }else{
                 return res.status(404).json({"error":"user not exist in DB"});
             }
@@ -253,17 +253,17 @@ module.exports= {
                         client.renamenx(username,usernamenew,function(e,r){
                             if(r){
                                 var sessiontoken=jwtUtils.generateTokenForUser(usernamenew);
-                                client.hset(usernamenew,'sessiontoken',sessiontoken);  
+                                client.hset(usernamenew,'sessiontoken',sessiontoken);
                                 res.status(200).json({"sessiontoken":sessiontoken});
                             }
                             if(e){
                                 res.status(403).json({"error":"acccount with this username already exist"});
                             }
                         });
-                              
+
                 }else{
                     return res.status(400).json({'error':'this token is a previous version'});
-                }      
+                }
             }else{
                 return res.status(404).json({"error":"user not exist in DB"});
             }

@@ -31,17 +31,17 @@ export default {
 	},
 	actions: {
 		login ({commit}, credentials) {
-			return api.post('/members/signin', credentials).then(response => {
-				ls.set('token', response.data.token)
+			return api.post('users/login/', credentials).then(response => {
+				ls.set('token', response.data.sessiontoken)
 				commit("setConnectedUser", response.data)
 			}).catch(error => {
 				console.log(error)
 			})
 		},
 		signup ({commit},credentials){
-			return api.post('/members', credentials).then(response => {
-				return api.post('/members/signin', credentials).then(response => {
-					ls.set('token', response.data.token)
+			return api.post('users/register/', credentials).then(response => {
+				return api.post('users/login/', credentials).then(response => {
+					ls.set('token', response.data.sessiontoken)
 					commit("setConnectedUser", response.data)
 				}).catch(error => {
 					console.log(error)
@@ -53,9 +53,10 @@ export default {
 		},
 		logout ({commit}, forceDeco) {
 			commit("initState")
+			app.defaults.headers.common['sessiontoken'] = "token="+ls.get("token");
 			ls.remove('token')
 			if(forceDeco){
-				api.delete('/members/signout').then(response => {
+				api.delete('users/logout/').then(response => {
 					commit("initState")
 				}).catch(error => {
 					reject("store > auth > logout -> error")
