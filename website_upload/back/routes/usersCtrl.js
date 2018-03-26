@@ -15,7 +15,8 @@ module.exports= {
         client.lrem("apikey",1,token,function(err,result){
             if(result){
                 client.lpush("apikey",token);
-                return res.status(200).json({'msg':'apikey exist'});
+                let info = {'api_key': token, 'upload_preset': 'wimsusxm', 'cloudName': 'morgandbs'}
+                return res.status(200).json(info);
             }else{
                return res.status(404).json({'error':'apikey not found'});
             }
