@@ -81,9 +81,11 @@
           },
           deleteFileInput: function(index) {
               for (var i = 0; i < this.input_file.length; i++) {
-                  if (this.input_file[i].id == index) {
+                  if (this.input_file[i].id === index) {
+                      if(this.input_file[i].file !== null){
+                        this.files.splice(i, 1);
+                      }
                       this.input_file.splice(i, 1);
-                      this.files.splice(i, 1);
                       break;
                   }
               }
