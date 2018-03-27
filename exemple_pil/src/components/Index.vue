@@ -1,28 +1,60 @@
 <template>
-  <div class="containerPrincipale">
-    <div class="containerImg">
-      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521469494/ft0bsgatnemccjrcztl6.jpg">	
-      </pil>
+  <div class="container-principal">
+    <div class="container-grid">
+      <div class="container-img">
+        <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521901214/lpndxvdggoekhjcvvevc.jpg">	
+        </pil>
+      </div>
+      <router-link :to="{ name: 'SingleImage', params: { src: 'http://res.cloudinary.com/morgandbs/image/upload/v1521901214/lpndxvdggoekhjcvvevc.jpg' }}">Full page image</router-link>
     </div>
-    <div class="containerImg">
-      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470466/d7qosyy79fhr3ubadh81.jpg">	
-      </pil>
+    <div class="container-grid">
+      <div class="container-img">
+        <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521901110/ejk81mwj5lhmehgqgqqd.jpg">	
+        </pil>
+      </div>
+      <router-link :to="{ name: 'SingleImage', params: { src: 'http://res.cloudinary.com/morgandbs/image/upload/v1521901110/ejk81mwj5lhmehgqgqqd.jpg' }}">Full page image</router-link>
     </div>
-    <div class="containerImg">
-      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470472/ct5c5qh3zkm297luvjbt.jpg">	
-      </pil>
+    <div class="container-grid">
+      <div class="container-img">
+        <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521896793/sample.jpg">	
+        </pil>
+      </div>
+      <router-link :to="{ name: 'SingleImage', params: { src: 'http://res.cloudinary.com/morgandbs/image/upload/v1521896793/sample.jpg' }}">Full page image</router-link>
     </div>
-    <div class="containerImg">
-      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470474/ixqqenkoxezrh8mivzsq.jpg">	
-      </pil>
+    <div class="container-grid">
+      <div class="container-img">
+        <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1522077004/pnsqfkpva8dsmx68mjws.jpg">	
+        </pil>
+      </div>
+      <router-link :to="{ name: 'SingleImage', params: { src: 'http://res.cloudinary.com/morgandbs/image/upload/v1522077004/pnsqfkpva8dsmx68mjws.jpg' }}">Full page image</router-link>
     </div>
-    <div class="containerImg">
-      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470477/nehiezzlsriarbyj4wyf.jpg">	
-      </pil>
+    <div class="container-grid">
+      <div class="container-img">
+        <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1522152555/vitchakorn-koonyosying-527285-unsplash.jpg">	
+        </pil>
+      </div>
+      <router-link :to="{ name: 'SingleImage', params: { src: 'http://res.cloudinary.com/morgandbs/image/upload/v1522152555/vitchakorn-koonyosying-527285-unsplash.jpg' }}">Full page image</router-link>
     </div>
-    <div class="containerImg">
-      <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1521470500/klh15k123fusq2z7bq55.jpg">	
-      </pil>
+    <div class="container-grid">
+      <div class="container-img">
+        <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1522152554/niketh-vellanki-202943-unsplash.jpg">	
+        </pil>
+      </div>
+      <router-link :to="{ name: 'SingleImage', params: { src: 'http://res.cloudinary.com/morgandbs/image/upload/v1522152554/niketh-vellanki-202943-unsplash.jpg' }}">Full page image</router-link>
+    </div>
+    <div class="container-grid">
+      <div class="container-img">
+        <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1522152550/alex-martinez-560583-unsplash.jpg">  
+        </pil>
+      </div>
+      <router-link :to="{ name: 'SingleImage', params: { src: 'http://res.cloudinary.com/morgandbs/image/upload/v1522152550/alex-martinez-560583-unsplash.jpg' }}">Full page image</router-link>
+    </div>
+    <div class="container-grid">
+      <div class="container-img">
+        <pil src = "http://res.cloudinary.com/morgandbs/image/upload/v1522076702/gyoicldqbdpi4nphq6jd.jpg">  
+        </pil>
+      </div>
+      <router-link :to="{ name: 'SingleImage', params: { src: 'http://res.cloudinary.com/morgandbs/image/upload/v1522076702/gyoicldqbdpi4nphq6jd.jpg' }}">Full page image</router-link>
     </div>
   </div>
 </template>
@@ -41,17 +73,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.containerPrincipale{
+.container-principal{
 	display:flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 	width:100%;
 }
-.containerImg{
+.container-grid{
   width: 20%;
   max-width: 20%;
   height:200px;
-  max-height:200px;
-  margin: 10px 2.5% 10px 2.5%;
+  max-height:250px;
+  margin: 50px 2.5% 50px 2.5%;
+}
+.container-img{
+  width:100%;
+  height:200px;
+  margin-bottom: 20px;
+}
+a{
+  text-decoration: none;
+  color:#f2f2f2;
+  background-color: #209CEE;
+  padding:10px;
 }
 </style>
