@@ -1,15 +1,15 @@
 //imports
 var express = require("express");
-var bodyParser= require("body-parser");
+var bodyParser = require("body-parser");
 var redis = require('redis');
 var axios = require('axios');
-var apiRouter=require('./apiRouter').router;
+var apiRouter = require('./apiRouter').router;
 //Instantiable server
 var server = express();
-var cors = require("cors");
 var client = redis.createClient();
+var cors = require('cors');
 // use it before all route definitions
-server.use(cors({origin: 'http://localhost:8080'}));
+server.use(cors({ origin: 'http://localhost:8080' }));
 // Body Parser configuration
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
@@ -18,7 +18,7 @@ server.get('/', function (req, res) {
     res.setHeader('Content-Type', 'text/html');
     res.status(200).send('<h1>Bonjour sur le serveur de PIL </h1>');
 });
-server.use('/api/',apiRouter);
+server.use('/api/', apiRouter);
 //launch server
 client.on('error', function (err) {
     console.log("Error " + err);

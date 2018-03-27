@@ -1,10 +1,10 @@
 //imports
-var express=require('express');
-var usersCtrl=require('./routes/usersCtrl');
-var imagesCtrl=require('./routes/imagesCtrl');
+var express = require('express');
+var usersCtrl = require('./routes/usersCtrl');
+var imagesCtrl = require('./routes/imagesCtrl');
 //Router
-exports.router=(function(){
-    var apiRouter=express.Router();
+exports.router = (function () {
+    var apiRouter = express.Router();
 
     //Users routes
     apiRouter.route('/users/register/').post(usersCtrl.register);
@@ -17,9 +17,10 @@ exports.router=(function(){
     apiRouter.route('/users/delete/').delete(usersCtrl.delete);
     //Images routes 
     apiRouter.route('/images/').get(imagesCtrl.getImages);
+    apiRouter.route('/images/delete').delete(imagesCtrl.delImages);
     apiRouter.route('/images/:id/').get(imagesCtrl.getImage);
     apiRouter.route('/images/add').post(imagesCtrl.addImage);
-    apiRouter.route('/images/:id/del').delete(imagesCtrl.delImage);
+    apiRouter.route('/images/:id/delete').delete(imagesCtrl.delImage);
     //apikey verification
     apiRouter.route('/apikey').get(usersCtrl.verifyapikey);
     /*
