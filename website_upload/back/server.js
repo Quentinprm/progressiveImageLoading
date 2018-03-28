@@ -9,7 +9,7 @@ var server = express();
 var client = redis.createClient();
 var cors = require('cors');
 // use it before all route definitions
-server.use(cors({ origin: 'http://localhost:8080' }));
+server.use(cors());
 // Body Parser configuration
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
@@ -24,5 +24,5 @@ client.on('error', function (err) {
     console.log("Error " + err);
 });
 server.listen(8081, function () {
-    console.log("serveur en écoute");
+    console.log("serveur en écoute sur le à l'adresse:"+"http://localhost:8081");
 });
