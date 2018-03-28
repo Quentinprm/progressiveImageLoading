@@ -4,6 +4,7 @@ var redis = require('redis');
 var axios = require('axios');
 var client = redis.createClient();
 var async = require('async');
+var randomToken= require('random-token');
 // config for cloudinary
 const cloudinary = require('cloudinary')
 cloudinary.config({
@@ -11,7 +12,6 @@ cloudinary.config({
     api_key: '396852746268724',
     api_secret: 'wQ8JPv0UxJv2_YaEKDQfHgRRArA'
 });
-
 //Routes
 module.exports = {
     addImage: function (req, res) {
@@ -23,12 +23,7 @@ module.exports = {
         if (name == null || linkhq == null || linklq == null) {
             return res.status(400).json({ 'error': 'missing parameters' });
         }
-        if (!client.exists("imageid")) {
-            client.set("imageid", 0);
-        }
-        client.incr("imageid", function (err, r) {
-            if (r) {
-                var id = r;
+                var id = randomToken(16);
                 var token = jwtUtils.parseAuthorization(headerAuth);
                 client.lrem("apikey", 1, token, function (err, result) {
                     if (result) {
@@ -47,11 +42,6 @@ module.exports = {
                         return res.status(404).json({ 'error': 'apikey not found' });
                     }
                 });
-            } else {
-                return res.status(500).json({ 'error': 'cannot increment id' });
-            }
-        });
-
     },
     getImages: function (req, res) {
         console.log("getImages function");
@@ -59,29 +49,18 @@ module.exports = {
         var token = jwtUtils.parseAuthorization(headerAuth);
         client.lrem("apikey", 1, token, function (err, result) {
             if (result) {
-                console.log("le client existe youpi");
                 client.lpush("apikey", token);
-                console.log("existe");
                 client.llen(token, function (error, resultat) {
                     if (resultat > 0) {
                         client.lrange(token, 0, resultat, function (er, re) {
                             if (re) {
-                                console.log(re.length);
                                 var liste = '{"images":[';
                                 async.each(re, function (item, callback) {
-                                    console.log("valeur de l'item:" + item);
                                     client.hgetall(item, function (e, r) {
-                                        console.log("on passe dans la récup de l'image");
                                         if (r) {
                                             if (r.token == token) {
                                                 liste += '{"linkhq":"' + r.linkhq + '","linklq":"' + r.linklq + '","name":"' + r.name + '","id":"' + item + '"}';
-                                                console.log("msg:" + liste);
-                                                console.log("valeur de l'item:" + item);
-                                                console.log("valeur de l'élement de fin:" + re[re.length - 1]);
-                                                console.log("valeur de l'égalité:" + item == re[re.length - 1]);
                                                 if (item == re[re.length - 1]) {
-                                                    console.log("on passe la vérif du token:" + liste);
-                                                    console.log("on arrive bien à la fin");
                                                     liste += "]}";
                                                     console.log("msg:" + liste);
                                                     return res.status(200).json(JSON.parse(liste));

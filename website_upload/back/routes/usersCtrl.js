@@ -203,7 +203,6 @@ module.exports = {
                     return res.status(402).json({ "error": "need to be log in" });
                 }
                 if (result.sessiontoken == jwtUtils.parseAuthorization(headerAuth)) {
-                    console.log("sessiontoken" + result.sessiontoken);
                     return res.status(200).json({ 'username': result.username, 'password': result.password, 'email': result.email, 'apikey': result.token })
                 } else {
                     return res.status(400).json({ 'error': 'this token is a previous version' });
