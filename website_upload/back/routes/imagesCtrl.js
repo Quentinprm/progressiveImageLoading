@@ -21,7 +21,7 @@ module.exports = {
         var linkhq = req.body.linkhq;
         var linklq = req.body.linklq;
         if (name == null || linkhq == null || linklq == null) {
-            return res.status(400).json({ 'error': 'missing parameters' });
+            return res.status(400).json({ 'error': 'missing parameters'});
         }
                 var id = randomToken(16);
                 var token = jwtUtils.parseAuthorization(headerAuth);
@@ -170,7 +170,7 @@ module.exports = {
                                             callback();
                                         }else{
                                             return res.status(500).json({"error":"one image delation error"});
-                                        }      
+                                        }
                                     })
 
                                 });

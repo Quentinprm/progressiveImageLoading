@@ -7,13 +7,20 @@
 			<button  v-on:click="logout()">Déconnexion</button>
 			<h2>Clé d'api</h2>
 			<p>{{ apikey }}</p>
+			<h2>Comptes</h2>
+			<p class="add">
+				<router-link :to="{ path: '/mdp' }">Modifier son mot de passe</router-link>
+			</p>
+			<p class="add">
+				<router-link :to="{ path: '/username' }">Modifier son nom d'utilisateur</router-link>
+			</p>
+			<p class="add">
+				<router-link :to="{ path: '/email' }">Modifier son mail</router-link>
+			</p>
 			<h2>Images</h2>
-			<p id="add">
+			<p class="add">
 				<router-link :to="{ path: '/' }">Uploader une image</router-link>
 			</p>
-			<!--<p v-for="chan in channels" class="chan">
-				<router-link :to="{ path: '/' + chan._id }">{{chan.label}}</router-link>
-			</p>-->
 		</div>
 		<div id="right">
 			<router-view :key="$route.fullPath"></router-view>
@@ -39,15 +46,7 @@ export default {
 		}
 	},
 	created () {
-		/*
 
-		api.get('/channels').then((response) => {
-			this.channels = response.data
-		});
-
-		api.get('/members', ls.get('token')).then((response) => {
-			this.members = response.data
-		});*/
 	},
 	computed: {
 		hasChannel () {
@@ -135,25 +134,28 @@ button{
 	margin: auto;
 	margin-bottom:2px;
 }
-#add {
+.add {
 	margin:0;
 	margin-bottom:2px;
 }
-button,#add a{
+button,.add a{
+	text-align: center;
 	display: block;
 	color: white;
 	padding: 8px 16px;
 	text-decoration: none;
 	background-color:deepskyblue;
 }
-button:hover,#add a:hover{
+button:hover,.add a:hover{
 	background-color:dodgerblue;
 }
 #right{
-	width:75%;
-	height:100%;
-	margin-left:25%;
-	padding:1px 16px;
+	width: 75%;
+	height: 100vh;
+	margin-left: 25%;
+	padding: 1px 16px;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 </style>

@@ -4,6 +4,9 @@ import Signin from '@/components/Signin'
 import Home from '@/components/Home'
 import Images from '@/components/Images'
 import Upload from '@/components/Upload'
+import Modifiermdp from '@/components/modifiermdp'
+import Modifieremail from '@/components/modifieremail'
+import Modifierusername from '@/components/modifierusername'
 import store from '@/store'
 
 Vue.use(Router)
@@ -18,6 +21,18 @@ export const router = new Router({
         {
           path: '',
           component: Upload
+        },
+        {
+          path: 'mdp',
+          component: Modifiermdp
+        },
+        {
+          path: 'email',
+          component: Modifieremail
+        },
+        {
+          path: 'username',
+          component: Modifierusername
         },
         {
           path: ':id',

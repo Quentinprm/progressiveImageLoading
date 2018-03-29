@@ -63,6 +63,28 @@ export default {
 					reject("store > auth > logout -> error")
 				})
 			}
+		},
+		changepassword ({commit},credentials){
+		  api.defaults.headers.common['sessiontoken'] = "token="+ls.get("token");
+		  return api.put('users/password/', credentials).then(response => {
+		  }).catch(error => {
+		    console.log(error);
+		  })
+		},
+		changeemail ({commit},credentials){
+		  api.defaults.headers.common['sessiontoken'] = "token="+ls.get("token");
+		  return api.put('users/email/', credentials).then(response => {
+		  }).catch(error => {
+		    console.log(error);
+		  })
+		},
+		changeusername ({commit},credentials){
+		  api.defaults.headers.common['sessiontoken'] = "token="+ls.get("token");
+		  return api.put('users/username/', credentials).then(response => {
+				ls.set('token', response.data.sessiontoken);
+		  }).catch(error => {
+		    console.log(error);
+		  })
 		}
 	}
 }
