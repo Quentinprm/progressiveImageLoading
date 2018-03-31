@@ -6,13 +6,25 @@ Progressive image loading is a vueJS solution which allow you to reduce the load
 
 #### Upload Component
 
+This is component is using external npm package (axios, random-id, vue-bootstrap).
+
 1. In a terminal
 
   ```
-  npm i progressive-image-loading-upload --save
+  npm i progressive-image-loading-upload-vue --save
   ```
-  
-2. In your vue Component
+ 
+2. In your main.js
+
+  ```
+  import BootstrapVue from 'bootstrap-vue'
+  import 'bootstrap/dist/css/bootstrap.css'
+  import 'bootstrap-vue/dist/bootstrap-vue.css'
+  Vue.use(BootstrapVue)
+  ```
+
+
+3. In your vue Component
 
   ```html
 <template>
@@ -20,22 +32,23 @@ Progressive image loading is a vueJS solution which allow you to reduce the load
 </template>
 
 <script>
-  import Upload from 'progressive-image-loading-upload'
+  import upload from 'progressive-image-loading-upload-vue'
 
   export default {
       components:{
-        'upload':Upload,
+        upload
       }
   }
 </script>
   ```
+  
   
 #### Progressive image Loading
 
 1. Installation
 
   ```html
-  npm i vue-progressive-image-loading
+  npm i vue-progressive-image-loading --save
   ```
   
 2. Imbrication
