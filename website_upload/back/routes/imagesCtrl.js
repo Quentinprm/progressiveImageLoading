@@ -16,15 +16,20 @@ cloudinary.config({
 module.exports = {
     addImage: function (req, res) {
         console.log("addImage function");
-        var headerAuth = req.headers['authorization'];
+        var headerAuth = req.body.headers.Authorization;
+        console.log("headers: "+headerAuth);
         var name = req.body.name;
         var linkhq = req.body.linkhq;
         var linklq = req.body.linklq;
+        console.log("name:"+name);
+        console.log("linkhq:"+linkhq);
+        console.log("linklq"+linklq);
         if (name == null || linkhq == null || linklq == null) {
             return res.status(400).json({ 'error': 'missing parameters'});
         }
                 var id = randomToken(16);
                 var token = jwtUtils.parseAuthorization(headerAuth);
+                  console.log("token: "+token);
                 client.lrem("apikey", 1, token, function (err, result) {
                     if (result) {
                         client.lpush("apikey", token);

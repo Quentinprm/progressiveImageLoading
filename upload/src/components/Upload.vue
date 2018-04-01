@@ -94,7 +94,7 @@
               let total = this.files.length
               let it = 0
               let self = this
-              axios.post('http://localhost:8081/api/apikey', {headers: {'Authorization': 'token='+this.apiKey}})
+              axios.get('http://localhost:8081/api/apikey', {headers: {'Authorization': 'token='+this.apiKey}})
                 .then((response) =>{
                   this.uploaded = true
                   for (let i = 0; i < total; i++) {
@@ -111,7 +111,7 @@
                               let url_low = url.split('upload/')[0]+'upload/q_01/'+url.split('upload/')[1]
 
                               let pic = {'name': name, 'linkhq': url, 'linklq': url_low}
-                              axios.post('http://localhost:8081/api/images', {headers: {'token': this.apiKey}, data: pic})
+                              axios.post('http://localhost:8081/api/images/add',{headers: {'Authorization': 'token='+this.apiKey}}, {data: pic})
                           })
                           .catch((error) => {
                               console.log(error)

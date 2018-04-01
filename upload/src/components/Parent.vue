@@ -1,5 +1,5 @@
 <template>
-  <upload apiKey="dqshkqlsdhk"></upload>
+  <upload apiKey="cKFyD6n8fpOFOkOzCUr70DZOfl1y2LchHiaJJ8bAeLMs6X2xURfXoAdOzXWn4ab1"></upload>
 </template>
 
 <script>

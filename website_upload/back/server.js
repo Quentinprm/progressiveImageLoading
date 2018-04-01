@@ -8,8 +8,14 @@ var apiRouter = require('./apiRouter').router;
 var server = express();
 var client = redis.createClient();
 var cors = require('cors');
+
 // use it before all route definitions
 server.use(cors());
+server.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 // Body Parser configuration
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
