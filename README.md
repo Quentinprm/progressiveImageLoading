@@ -85,19 +85,19 @@ in your terminal run : node server.js;
 #### Users routes
 
 
-http://APINAME/api/users/register/ post method for create an account whith username email and password in body;
-http://APINAME/api/users/login/ post method for login with username and password in body;
-http://APINAME/api/users/logout/ post method for with sessiontoken in headers like : sessiontoken token=YOURTOKEN logout;
-http://APINAME/api/users/email/ put method for change email with email in body with sessiontoken in headers like : sessiontoken  token=YOURTOKEN;
-http://APINAME/api/users/password/ put method for change password with password in body with sessiontoken in headers like : sessiontoken  token=YOURTOKEN;
-http://APINAME/api/users/username/ put method for change username with username in body with sessiontoken in headers like : sessiontoken  token=YOURTOKEN;
-http://APINAME/api/users/profile/ get method with sessiontoken in headers like : sessiontoken  token=YOURTOKEN
-http://APINAME/api/users/delete/' delete method with sessiontoken in headers like : sessiontoken token=YOURTOKEN
+1. http://APINAME/api/users/register/ post method for create an account whith username email and password in body;
+2. http://APINAME/api/users/login/ post method for login with username and password in body;
+3. http://APINAME/api/users/logout/ post method for with sessiontoken in headers like : sessiontoken token=YOURTOKEN logout;
+4. http://APINAME/api/users/email/ put method for change email with email in body with sessiontoken in headers like : sessiontoken  token=YOURTOKEN;
+5. http://APINAME/api/users/password/ put method for change password with password in body with sessiontoken in headers like : sessiontoken  token=YOURTOKEN;
+6. http://APINAME/api/users/username/ put method for change username with username in body with sessiontoken in headers like : sessiontoken  token=YOURTOKEN;
+7. http://APINAME/api/users/profile/ get method with sessiontoken in headers like : sessiontoken  token=YOURTOKEN
+8. http://APINAME/api/users/delete/' delete method with sessiontoken in headers like : sessiontoken token=YOURTOKEN
 ### Images routes
-http://APINAME/api/images/' get method for get all images with Authorization token=YOURTOKEN in headers;
-http://APINAME/api/images/delete delete method for  all images with Authorization token=YOURTOKEN in headers;
-http://APINAME/api/images/:id/ get method for get one image with Authorization token=YOURTOKEN in headers;
-http://APINAME/api/images/add/ post method for image with Authorization token=YOURTOKEN , name , linkhq and linklq in body;
-http://APINAME/api/images/:id/delete'  delete method for ane image with Authorization token=YOURTOKEN in headers;
+1. http://APINAME/api/images/' get method for get all images with Authorization token=YOURTOKEN in headers;
+2. http://APINAME/api/images/delete delete method for  all images with Authorization token=YOURTOKEN in headers;
+3. http://APINAME/api/images/:id/ get method for get one image with Authorization token=YOURTOKEN in headers;
+4. http://APINAME/api/images/add/ post method for image with Authorization token=YOURTOKEN , name , linkhq and linklq in body;
+5. http://APINAME/api/images/:id/delete'  delete method for ane image with Authorization token=YOURTOKEN in headers;
 ### apikey verification
-http://APINAME/api/apikey get method for verify api with Authorization token=YOURTOKEN in headers;
+1. http://APINAME/api/apikey get method for verify api with Authorization token=YOURTOKEN in headers;
