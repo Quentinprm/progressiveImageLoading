@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img v-bind:class="{ hidden: hiddenImg }" v-bind:src="deterioratedImg" @load="onLoadLow"/>
+    <img v-bind:class="{ hidden: hiddenImg, deterioratedImg }" v-bind:src="deterioratedImg" @load="onLoadLow"/>
     <img v-bind:class="{ hidden: !hiddenImg }" v-bind:src="naturalImg" @load="onLoadHigh"/>
   </div>
 </template>
@@ -72,6 +72,10 @@ img{
   left:0;
   opacity:1;
   transition:opacity 0.5s linear;
+}
+
+.deterioratedImg{
+  filter: blur(10px);
 }
 
 .hidden{
