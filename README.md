@@ -79,10 +79,11 @@ Une fois inscrit, gratuitement, vous pouvez:
 
     -Chaque site requiert une  clé API, que vous pourrez acquérir sur notre site web: http://PIL.com
 ### Utilisation de l'API
-#### Users routes
 this API use Node and Redis;
 for start server make npm install ;
 in your terminal run : node server.js;
+#### Users routes
+
 
 http://APINAME/api/users/register/ post method for create an account whith username email and password in body;
 http://APINAME/api/users/login/ post method for login with username and password in body;
